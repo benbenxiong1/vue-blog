@@ -8,7 +8,7 @@
           <div class="content-head-item"><span>月榜</span></div>
         </div>
         <div class="content-box">
-          <div class="box" v-for="item in data" v-bind="item.id" key="item.id">
+          <div class="box" v-for="item in data" v-bind="item.id" :key="item.id">
             <div class="box-head">
               <div class="title-label">
                 <el-tag :type="item.tag">随笔</el-tag>

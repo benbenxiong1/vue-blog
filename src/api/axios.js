@@ -1,14 +1,15 @@
 import axios from "axios";
-import { Message } from "element-plus";
+import { ElMessage } from "element-plus";
+import qs from "qs";
 
 //json-axios实例
 const service = axios.create({
   timeout: 60000,
   headers: {
-    "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+    "Content-Type": "application/json; charset=UTF-8",
     "X-Requested-With": "XMLHttpRequest",
   },
-  baseURL: "xxx",
+  baseURL: "/",
 });
 
 //formData-axios实例
@@ -18,12 +19,16 @@ const serviceForm = axios.create({
     "Content-Type": "multipart/form-data; charset=UTF-8",
     "X-Requested-With": "XMLHttpRequest",
   },
-  baseURL: "xxx",
+  baseURL: "/",
 });
 
 //配置http request 拦截器
 axios.interceptors.request.use(
   function (config) {
+    //判断是post请求 使用qs 转json
+    if (config.method === "post") {
+      config.data = qs.stringify(config.data);
+    }
     // 在发送请求之前做些什么
     return config;
   },
@@ -35,11 +40,11 @@ axios.interceptors.request.use(
 
 //http request 拦截器 在发送请求之前做些什么
 let request = function (config) {
-  // const token = getToken();
-  // if (token) {
-  //   // 判断是否存在token，如果存在的话，则每个http header都加上token
-  //   config.headers.token = token;
-  // }
+  const token = localStorage.getItem("token");
+  if (token) {
+    // 判断是否存在token，如果存在的话，则每个http header都加上token
+    config.headers.Authorization = token;
+  }
   return config;
 };
 
@@ -67,16 +72,8 @@ axios.interceptors.response.use(
 //响应成功前做拦截处理
 let response = function (res) {
   const data = res.data;
-  const message = `${data.code}--${data.msg}` || "未知错误";
-  if (res.status == 200) {
-    if (data.code == 200) {
-      return data;
-    } else {
-      Message({
-        message: message,
-        type: "error",
-      });
-    }
+  if (res.status === 200) {
+    return data;
   }
 };
 //响应失败前拦截处理
@@ -84,7 +81,7 @@ let response_err = function (err) {
   if (err.response) {
     const data = err.response.data;
     const message = `${data.code}--${data.msg}` || "未知错误";
-    Message({
+    ElMessage({
       message: message,
       type: "error",
     });
@@ -97,5 +94,7 @@ service.interceptors.response.use(response, response_err);
 serviceForm.interceptors.response.use(response, response_err);
 
 //一种是直接挂在window对象下,这样写可以在其它文件中直接使用service和serviceForm
-window.service = service;
-window.serviceForm = serviceForm;
+// window.service = service;
+// window.serviceForm = serviceForm;
+
+export { service, serviceForm };

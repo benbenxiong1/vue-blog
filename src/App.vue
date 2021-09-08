@@ -44,7 +44,6 @@ export default {
 .el-main {
   background-color: #f0f2f5;
   color: #333;
-  text-align: center;
 }
 
 body > .el-container {

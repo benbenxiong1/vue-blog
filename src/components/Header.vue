@@ -14,7 +14,7 @@
     </el-col>
     <el-col :span="12">
       <el-menu
-        default-active="0"
+        :default-active="activeIndex"
         class="el-menu-demo"
         mode="horizontal"
         @select="handleSelect"
@@ -22,7 +22,7 @@
         text-color="#000000"
         active-text-color="#d75354"
       >
-        <template v-for="(item,index) in data" :key="item.id">
+        <template v-for="(item, index) in data" :key="item.id">
           <el-menu-item :index="index">{{ item.title }}</el-menu-item>
         </template>
       </el-menu>
@@ -30,28 +30,59 @@
     <el-col :span="4">
       <div class="grid-content bg-purple">
         <el-menu
-          :default-active="activeIndex2"
+          default-active="10"
           class="el-menu-demo"
           mode="horizontal"
-          @select="handleSelect"
+          @select="handleSelectClick"
           background-color="#ffffff"
           text-color="#000000"
           active-text-color="#ffd04b"
         >
-          <el-menu-item index="" disabled>消息</el-menu-item>
-          <el-submenu index="">
-            <template #title>
-              <el-avatar size="small" :src="circleUrl"></el-avatar>
-              笨笨熊</template
+          <template v-if="bool">
+            <el-menu-item index="">消息</el-menu-item>
+            <el-submenu index="">
+              <template #title>
+                <el-avatar size="small" :src="userInfo.avatar"></el-avatar>
+                {{ userInfo.nickname }}
+              </template>
+              <el-menu-item index="info">个人中心</el-menu-item>
+              <el-menu-item index="logout" @click="logoutClick"
+                >退出</el-menu-item
+              >
+            </el-submenu>
+          </template>
+
+          <template v-if="!bool">
+            <el-button type="success" @click="dialogFormVisible = true"
+              >登录</el-button
             >
-            <el-menu-item index="2-1">选项1</el-menu-item>
-            <el-menu-item index="2-2">选项2</el-menu-item>
-            <el-menu-item index="2-3">选项3</el-menu-item>
-          </el-submenu>
+            <el-button type="danger">注册</el-button>
+          </template>
         </el-menu>
       </div>
     </el-col>
   </el-row>
+
+  <el-dialog title="登录" v-model="dialogFormVisible" width="500px">
+    <el-form :model="form">
+      <el-form-item label="用户名" :label-width="formLabelWidth">
+        <el-input v-model="form.name" autocomplete="off"></el-input>
+      </el-form-item>
+      <el-form-item label="密码" :label-width="formLabelWidth">
+        <el-input
+          type="password"
+          v-model="form.password"
+          autocomplete="off"
+        ></el-input>
+      </el-form-item>
+    </el-form>
+    <template #footer>
+      <span class="dialog-footer">
+        <el-button @click="dialogFormVisible = false">取 消</el-button>
+        <el-button type="primary" @click="loginClick">确 定</el-button>
+      </span>
+    </template>
+  </el-dialog>
 </template>
 
 <script>
@@ -61,16 +92,17 @@ export default {
   data() {
     return {
       logo: logo,
-      activeIndex: "1",
-      activeIndex2: "1",
+      activeIndex: "0",
       url: "https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg",
       circleUrl: logo,
-      //<el-menu-item index="1">首页</el-menu-item>
-      // <el-menu-item index="2">文章</el-menu-item>
-      // <el-menu-item index="3">归档</el-menu-item>
-      // <el-menu-item index="4">项目</el-menu-item>
-      // <el-menu-item index="5">历程</el-menu-item>
-      // <el-menu-item index="6">关于</el-menu-item>
+      bool: false,
+      dialogFormVisible: false,
+      userInfo: {},
+      form: {
+        name: "",
+        password: "",
+      },
+      formLabelWidth: "60px",
       data: [
         {
           id: 1,
@@ -86,12 +118,57 @@ export default {
     };
   },
   methods: {
-    handleSelect(key, keyPath) {
-      console.log(key, keyPath);
+    handleSelect(key) {
+      this.activeIndex = key;
       const that = this;
-      console.log(that.data[key].router);
       that.$router.push({ name: that.data[key].router });
     },
+    //登录
+    loginClick() {
+      const that = this;
+      if (!that.form.name.length) {
+        that.$message.error("用户名不能为空");
+        return "";
+      }
+      if (!that.form.password.length) {
+        that.$message.error("密码不能为空");
+        return "";
+      }
+      that.$axios.post("/api/login", that.form).then((res) => {
+        if (res.code === 200) {
+          localStorage.setItem("token", res.data.token);
+          localStorage.setItem("userInfo", JSON.stringify(res.data.info));
+          that.userInfo = res.data.info;
+          that.bool = true;
+          that.$message({
+            message: "登录成功",
+            type: "success",
+          });
+          that.dialogFormVisible = false;
+        } else {
+          that.$message.error(res.message);
+        }
+      });
+    },
+    //退出
+    handleSelectClick(key) {
+      if (key === "logout") {
+        localStorage.setItem("token", "");
+        localStorage.setItem("userInfo", "");
+        this.$router.go(0);
+      }
+      if (key === "info") {
+        this.$router.push({ name: "Info" });
+      }
+    },
+  },
+  created() {
+    const token = localStorage.getItem("token");
+    const userInfo = localStorage.getItem("userInfo");
+    this.bool = !!(token && userInfo);
+    if (userInfo.length) {
+      this.userInfo = JSON.parse(userInfo);
+    }
   },
 };
 </script>
