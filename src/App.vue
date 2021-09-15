@@ -1,13 +1,13 @@
 <template>
-  <div class="common-layout">
+  <div class="common-layout" id="box">
     <el-container>
-      <el-header>
+      <el-header v-if="!$route.meta.isHeard">
         <Header></Header>
       </el-header>
       <el-main>
         <router-view />
       </el-main>
-      <el-footer>
+      <el-footer v-if="!$route.meta.isFooter">
         <Footer></Footer>
       </el-footer>
     </el-container>
@@ -26,36 +26,31 @@ export default {
 </script>
 
 <style lang="scss">
-.el-header,
-.el-footer {
-  /*background-color: #b3c0d1;*/
-  color: #333;
-  text-align: center;
-  line-height: 60px;
+body {
+  padding: 0;
+  margin: 0;
 }
-
-.el-aside {
-  background-color: #d3dce6;
-  color: #333;
-  text-align: center;
-  line-height: 200px;
+#app {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
 }
-
-.el-main {
-  background-color: #f0f2f5;
-  color: #333;
-}
-
-body > .el-container {
-  margin-bottom: 40px;
-}
-
-.el-container:nth-child(5) .el-aside,
-.el-container:nth-child(6) .el-aside {
-  line-height: 260px;
-}
-
-.el-container:nth-child(7) .el-aside {
-  line-height: 320px;
+#box {
+  width: 100%;
+  height: 100%;
+  background-image: url("./assets/backgroun.jpg");
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  opacity: 0.5;
+  background-attachment: fixed;
+  padding: 0;
+  margin: 0;
+  .el-main {
+    padding: 0;
+    margin: 30px 10px;
+  }
 }
 </style>
