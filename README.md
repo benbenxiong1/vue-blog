@@ -1,5 +1,5 @@
 # blog-vue
-> 基于 vue-cli4 + element-plus 搭建(二次元)的博客系统
+> 基于 vue-cli4 + element-plus 搭建(二次元)的博客系统（逐步完善中）
 
 ## Project setup
 ```
