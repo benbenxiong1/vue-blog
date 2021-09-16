@@ -21,6 +21,24 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/ArticleList"),
   },
+  {
+    path: "/diary-list",
+    name: "DiaryList",
+    meta: {
+      title: "随笔日记 | 笨笨小窝",
+    },
+    component: () =>
+        import(/* webpackChunkName: "about" */ "../views/Diary"),
+  },
+  {
+    path: "/message-board",
+    name: "MessageBoard",
+    meta: {
+      title: "留言板 | 笨笨小窝",
+    },
+    component: () =>
+        import(/* webpackChunkName: "about" */ "../views/MessageBoard"),
+  },
 ];
 
 const router = createRouter({

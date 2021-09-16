@@ -4,9 +4,11 @@
       <el-header v-if="!$route.meta.isHeard">
         <Header></Header>
       </el-header>
-      <el-main>
+      <div :id="!$route.meta.isHeard ? 'main_box' : ''">
+<!--      <el-main :id="!$route.meta.isHeard ? 'main_box' : ''">-->
         <router-view />
-      </el-main>
+      </div>
+<!--      </el-main>-->
       <el-footer v-if="!$route.meta.isFooter">
         <Footer></Footer>
       </el-footer>
@@ -48,9 +50,15 @@ body {
   background-attachment: fixed;
   padding: 0;
   margin: 0;
+  .el-header{
+    padding: 0;
+  }
   .el-main {
     padding: 0;
-    margin: 30px 10px;
+    margin: 0;
+  }
+  #main_box {
+    margin: 30px 10px 20px 10px;
   }
 }
 </style>

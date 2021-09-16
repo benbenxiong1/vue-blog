@@ -7,7 +7,7 @@
           :src="logo"
           fit="contain"
         ></el-image>
-        <span>Benbenxiong</span>
+        <span>benbenxiong</span>
       </div>
       <template v-for="(item, index) in nav" :key="index">
         <div class="nav-title">
@@ -31,16 +31,16 @@ export default {
       logo: logo,
       nav: [
         {
-          title: "首页",
-          path: "/",
-        },
-        {
           title: "技术&文章",
           path: "/article-list",
         },
         {
           title: "随笔日志",
           path: "/article-list",
+        },
+        {
+          title: "留言板",
+          path: "/message-board",
         },
         {
           title: "个人中心",
@@ -57,11 +57,11 @@ export default {
     const that = this;
     that.styleChange.width = window.innerWidth + "px"; // 高
     that.styleChange.height = window.innerHeight + "px"; // 宽
-    document.body.style.overflow = "hidden";
-    var mo = function (e) {
-      e.preventDefault();
-    };
-    document.addEventListener("touchmove", mo, false); //禁止页面滑动
+    // document.body.style.overflow = "hidden";
+    // var mo = function (e) {
+    //   e.preventDefault();
+    // };
+    // document.addEventListener("touchmove", mo, false); //禁止页面滑动
   },
 };
 </script>
@@ -86,6 +86,7 @@ export default {
       display: flex;
       justify-content: left;
       align-items: center;
+
     }
     .nav-title {
       display: flex;
@@ -93,7 +94,7 @@ export default {
       align-items: center;
       margin: 20px 20px;
       span {
-        margin: 5px;
+        margin: 10px;
       }
     }
   }
