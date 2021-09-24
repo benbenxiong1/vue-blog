@@ -43,8 +43,8 @@ export default {
           path: "/message-board",
         },
         {
-          title: "个人中心",
-          path: "/article-list",
+          title: "个人介绍",
+          path: "/info",
         },
       ],
       styleChange: {

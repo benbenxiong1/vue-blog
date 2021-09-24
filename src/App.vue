@@ -5,10 +5,8 @@
         <Header></Header>
       </el-header>
       <div :id="!$route.meta.isHeard ? 'main_box' : ''">
-<!--      <el-main :id="!$route.meta.isHeard ? 'main_box' : ''">-->
         <router-view />
       </div>
-<!--      </el-main>-->
       <el-footer v-if="!$route.meta.isFooter">
         <Footer></Footer>
       </el-footer>

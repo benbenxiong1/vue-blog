@@ -22,13 +22,37 @@ const routes = [
       import(/* webpackChunkName: "about" */ "../views/ArticleList"),
   },
   {
+    path: "/article",
+    name: "Article",
+    meta: {
+      title: "文章&技术-详情 | 笨笨小窝",
+    },
+    component: () => import(/* webpackChunkName: "about" */ "../views/Article"),
+  },
+  {
+    path: "/article-add",
+    name: "CreateArticle",
+    meta: {
+      title: "文章&技术-添加 | 笨笨小窝",
+    },
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/CreateArticle"),
+  },
+  {
     path: "/diary-list",
     name: "DiaryList",
     meta: {
-      title: "随笔日记 | 笨笨小窝",
+      title: "随笔日记-列表 | 笨笨小窝",
     },
-    component: () =>
-        import(/* webpackChunkName: "about" */ "../views/Diary"),
+    component: () => import(/* webpackChunkName: "about" */ "../views/DiaryList"),
+  },
+  {
+    path: "/diary",
+    name: "Diary",
+    meta: {
+      title: "随笔日记-详情 | 笨笨小窝",
+    },
+    component: () => import(/* webpackChunkName: "about" */ "../views/Diary"),
   },
   {
     path: "/message-board",
@@ -37,7 +61,16 @@ const routes = [
       title: "留言板 | 笨笨小窝",
     },
     component: () =>
-        import(/* webpackChunkName: "about" */ "../views/MessageBoard"),
+      import(/* webpackChunkName: "about" */ "../views/MessageBoard"),
+  },
+  {
+    path: "/info",
+    name: "Info",
+    meta: {
+      title: "个人简介 | 笨笨小窝",
+    },
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/Info"),
   },
 ];
 

@@ -69,7 +69,13 @@
                     </el-tag>
                   </div>
                   <div class="content-box-tag-right">
-                    <el-tag type="info" effect="dark"> 阅读全文 </el-tag>
+                    <el-tag
+                      type="info"
+                      @click="darkClick(item.id)"
+                      effect="dark"
+                    >
+                      阅读全文
+                    </el-tag>
                   </div>
                 </div>
               </el-col>
@@ -208,6 +214,9 @@ export default {
       });
       this.pageInfo(page);
     },
+    darkClick: function (id) {
+      this.$router.push({ path: "/article", query: { id: id } });
+    },
   },
 };
 </script>
@@ -229,8 +238,10 @@ export default {
         text-align: left;
         span {
           font-size: 24px;
+          cursor: pointer;
         }
         p {
+          cursor: pointer;
           text-indent: 2em;
           overflow: hidden;
           text-overflow: ellipsis;
@@ -259,6 +270,9 @@ export default {
           .el-tag {
             margin-right: 20px;
           }
+        }
+        .content-box-tag-right {
+          cursor: pointer;
         }
       }
     }
