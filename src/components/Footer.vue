@@ -1,9 +1,9 @@
 <template>
-<!--  <el-backtop target=".page-component__scroll .el-scrollbar__wrap"></el-backtop>-->
+  <el-backtop />
   <el-row :gutter="20">
     <el-col :span="20" :offset="2">
       <div class="grid-content bg-purple">
-
+        不知道放什么好
       </div>
     </el-col>
   </el-row>

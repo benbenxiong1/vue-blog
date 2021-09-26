@@ -74,6 +74,7 @@ export default {
     display: flex;
     justify-content: space-between;
     .nav-img {
+      cursor: pointer;
       display: flex;
       justify-content: left;
       align-items: center;
@@ -93,6 +94,7 @@ export default {
       justify-content: left;
       align-items: center;
       margin: 0 0 0 50px;
+      cursor: pointer;
     }
 
   }

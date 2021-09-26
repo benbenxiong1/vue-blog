@@ -65,7 +65,6 @@ export default {
   margin: 20px 10px 20px 10px;
   padding: 0 0 0.5rem 0;
   background: #ffffff;
-  opacity: 0.9;
   border-radius: 0.5rem;
   .user-info-top {
     border-radius: 0.5rem 0.5rem 0 0;
@@ -88,7 +87,6 @@ export default {
 .tag-right {
   margin: 20px 10px 20px 10px;
   background: #ffffff;
-  opacity: 0.9;
   border-radius: 0.5rem;
 }
 </style>

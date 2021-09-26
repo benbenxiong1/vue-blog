@@ -57,6 +57,7 @@ body {
   }
   #main_box {
     margin: 30px 10px 20px 10px;
+    opacity: 0.9;
   }
 }
 </style>

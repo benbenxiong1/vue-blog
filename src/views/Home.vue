@@ -93,6 +93,7 @@ export default {
       justify-content: left;
       align-items: center;
       margin: 20px 20px;
+      cursor: pointer;
       span {
         margin: 10px;
       }

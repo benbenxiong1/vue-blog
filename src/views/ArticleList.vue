@@ -226,7 +226,6 @@ export default {
   margin: 20px 10px 20px 10px;
   .content-box-article {
     background: #ffffff;
-    opacity: 0.9;
     margin: 10px 0;
     border-radius: 0.5rem;
     padding: 20px;
@@ -283,42 +282,11 @@ export default {
   margin: 10px;
   border-radius: 0.5rem;
   padding: 20px;
-  opacity: 0.9;
   .el-pagination {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-wrap: nowrap;
   }
-}
-.user-right {
-  margin: 20px 10px 20px 10px;
-  padding: 0 0  0.5rem 0;
-  background: #ffffff;
-  opacity: 0.9;
-  border-radius: 0.5rem;
-  .user-info-top {
-    border-radius: 0.5rem 0.5rem 0 0;
-    height: 5rem;
-    width: 100%;
-    opacity: 1;
-    background-image: url("/1.jpg");
-  }
-  .user-info-content {
-    img {
-      width: 4rem;
-      border-radius: 2rem;
-      margin-top: -2rem;
-    }
-    .el-tag {
-      margin: 0.2rem;
-    }
-  }
-}
-.tag-right {
-  margin: 20px 10px 20px 10px;
-  background: #ffffff;
-  opacity: 0.9;
-  border-radius: 0.5rem;
 }
 </style>

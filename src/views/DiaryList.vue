@@ -100,7 +100,6 @@ export default {
 .bg-white {
   margin: 20px 10px 20px 10px;
   background: #ffffff;
-  opacity: 0.9;
   text-align: left;
   padding: 2rem 2rem 2rem 0;
   border-radius: 0.5rem;
@@ -110,7 +109,6 @@ export default {
   margin: 10px;
   border-radius: 0.5rem;
   padding: 20px;
-  opacity: 0.9;
   .el-pagination {
     display: flex;
     align-items: center;
