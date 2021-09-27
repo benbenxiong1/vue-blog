@@ -67,7 +67,7 @@ export default {
 </script>
 
 <style lang="scss">
-.box-start{
+.box-start {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -79,14 +79,13 @@ export default {
   .box-nav {
     display: flex;
     justify-items: center;
-    background: #cccccc;
+    background: #ffffff;
     border-radius: 10px;
-    opacity: 0.8;
+    opacity: 0.5;
     .nav-img {
       display: flex;
       justify-content: left;
       align-items: center;
-
     }
     .nav-title {
       display: flex;

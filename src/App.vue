@@ -48,7 +48,7 @@ body {
   background-attachment: fixed;
   padding: 0;
   margin: 0;
-  .el-header{
+  .el-header {
     padding: 0;
   }
   .el-main {

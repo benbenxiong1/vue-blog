@@ -3,20 +3,23 @@
     <el-col :span="16" :offset="2">
       <div class="message-board-head">
         <div class="message-board-img">
-          <img src="/1.jpg" alt="">
+          <img src="/1.jpg" alt="" />
         </div>
         <div class="message-board-desc">
           <span class="span-title">留言板</span>
-          <span class="span-desc">有问题和想说的都可以在这里面评论。(^_^)ノ但请遵守本站</span>
+          <span class="span-desc">
+            有问题和想说的都可以在这里面评论。(^_^)ノ但请遵守本站
+            <a href="#">评论规则</a>
+          </span>
         </div>
       </div>
       <div class="message-board-content">
         <div class="box-reply">
           <el-form ref="form" :model="form" label-width="120px">
             <div class="reply-editor-header">
-              <input type="text" placeholder="昵称" />
-              <input type="text" placeholder="邮箱" />
-              <input type="text" placeholder="网址" />
+              <input type="text" :model="form.name" placeholder="昵称" />
+              <input type="text" :model="form.email" placeholder="邮箱" />
+              <input type="text" :model="form.url" placeholder="网址" />
             </div>
             <div class="reply-editor-comment">
               <textarea name="" id="" cols="30" rows="10"></textarea>
@@ -41,7 +44,7 @@
               <img src="/avatar.jpg" alt="" />
               <div class="message-board-info">
                 <div class="message-board-info-tile">
-                  <span class="span-name">benbenxiong</span>
+                  <span class="span-name">benbenxiong-{{ item.id }}</span>
                   <span class="span-time">2021-06-02</span>
                 </div>
                 <p>
@@ -70,12 +73,8 @@
               </div>
             </div>
           </div>
-          <div
-            class="loading"
-            v-show="!loading"
-            v-loading="!loading"
-            style="height: 3rem; width: 100%"
-          ></div>
+          <div class="loadings" v-if="loadings">拼命加载中...</div>
+          <div class="loadings" v-if="disabled">没有了更多了...</div>
         </div>
       </div>
     </el-col>
@@ -85,8 +84,13 @@
 
 <script>
 import RightList from "@/components/Right";
+import { ElInfiniteScroll, ElLoading } from "element-plus";
 export default {
   name: "MessageBoard",
+  directives: {
+    "infinite-scroll": ElInfiniteScroll,
+    loading: ElLoading,
+  },
   components: {
     RightList,
   },
@@ -104,7 +108,12 @@ export default {
       ],
       disabled: false,
       i: 0,
-      loading: true,
+      loadings: false,
+      form: {
+        name: "",
+        email: "",
+        url: "",
+      },
     };
   },
   created() {},
@@ -112,17 +121,17 @@ export default {
   methods: {
     load() {
       const that = this;
-      that.loading = false;
+      that.loadings = true;
       clearTimeout(that.timer);
       that.timer = setTimeout(() => {
-        that.loading = true;
+        that.loadings = false;
         that.i++;
         that.count.push({ id: 5 });
         if (that.i >= 10) {
           that.disabled = true;
         }
         console.log(1);
-      }, 1000);
+      }, 2000);
     },
   },
 };
@@ -151,13 +160,17 @@ export default {
     .span-desc {
       display: block;
       line-height: 100px;
+      a {
+        color: #5755d9;
+        text-decoration: none;
+      }
     }
   }
 }
 .message-board-content {
   text-align: left;
   background: #ffffff;
-  height: 100%;
+  height: auto;
   margin: 20px 10px 20px 10px;
   padding: 2rem 2rem 0 2rem;
   border-radius: 0.5rem;
@@ -234,6 +247,13 @@ export default {
       .message-board-child {
         margin-top: 1rem;
       }
+    }
+    .loadings {
+      height: 2rem;
+      width: 100%;
+      text-align: center;
+      line-height: 2rem;
+      color: #cccccc;
     }
   }
 }

@@ -69,7 +69,6 @@ export default {
 <style lang="scss">
 .head-box {
   background: #ffffff;
-  opacity: 0.9;
   .box-nav {
     display: flex;
     justify-content: space-between;

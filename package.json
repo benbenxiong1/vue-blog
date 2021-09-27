@@ -16,6 +16,7 @@
     "core-js": "^3.6.5",
     "element-plus": "^1.0.2-beta.71",
     "mavon-editor": "^2.9.1",
+    "unplugin-vue-components": "^0.15.4",
     "vue": "3.1.5",
     "vue-router": "^4.0.0-0",
     "vuex": "^4.0.0-0"
@@ -38,6 +39,7 @@
     "prettier": "^2.2.1",
     "sass": "^1.26.5",
     "sass-loader": "^8.0.2",
-    "service": "^0.1.4"
+    "service": "^0.1.4",
+    "webpack-bundle-analyzer": "^4.4.2"
   }
 }

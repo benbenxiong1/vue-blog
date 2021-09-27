@@ -1,5 +1,5 @@
 import { createApp } from "vue";
-import ElementPlus from "element-plus";
+// import ElementPlus from "element-plus";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
@@ -31,7 +31,7 @@ app.config.globalProperties.$axios = service;
 app.config.globalProperties.$axiosForm = serviceForm;
 
 app
-  .use(ElementPlus)
+  // .use(ElementPlus)
   .use(store)
   .use(router)
   .use(VueMarkdownEditor)
