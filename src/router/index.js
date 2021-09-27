@@ -16,7 +16,7 @@ const routes = [
     path: "/article-list",
     name: "ArticleList",
     meta: {
-      title: "文章&技术 | 笨笨小窝",
+      title: "文章&技术",
     },
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/ArticleList"),
@@ -25,7 +25,7 @@ const routes = [
     path: "/article",
     name: "Article",
     meta: {
-      title: "文章&技术-详情 | 笨笨小窝",
+      title: "文章&技术-详情",
     },
     component: () => import(/* webpackChunkName: "about" */ "../views/Article"),
   },
@@ -33,7 +33,7 @@ const routes = [
     path: "/article-add",
     name: "CreateArticle",
     meta: {
-      title: "文章&技术-添加 | 笨笨小窝",
+      title: "文章&技术-添加",
     },
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/CreateArticle"),
@@ -42,7 +42,7 @@ const routes = [
     path: "/diary-list",
     name: "DiaryList",
     meta: {
-      title: "随笔日记-列表 | 笨笨小窝",
+      title: "随笔日记-列表",
     },
     component: () => import(/* webpackChunkName: "about" */ "../views/DiaryList"),
   },
@@ -50,7 +50,7 @@ const routes = [
     path: "/diary",
     name: "Diary",
     meta: {
-      title: "随笔日记-详情 | 笨笨小窝",
+      title: "随笔日记-详情",
     },
     component: () => import(/* webpackChunkName: "about" */ "../views/Diary"),
   },
@@ -58,7 +58,7 @@ const routes = [
     path: "/message-board",
     name: "MessageBoard",
     meta: {
-      title: "留言板 | 笨笨小窝",
+      title: "留言板",
     },
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/MessageBoard"),
@@ -67,7 +67,7 @@ const routes = [
     path: "/info",
     name: "Info",
     meta: {
-      title: "个人简介 | 笨笨小窝",
+      title: "个人简介",
     },
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/Info"),
@@ -82,7 +82,7 @@ const router = createRouter({
 //添加自定义网站title
 router.afterEach((to) => {
   if (to.meta.title) {
-    document.title = to.meta.title;
+    document.title = to.meta.title + " | 笨笨小窝";
   }
 });
 

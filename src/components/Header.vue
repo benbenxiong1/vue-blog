@@ -11,12 +11,22 @@
             ></el-image>
             <span>benbenxiong</span>
           </div>
-          <div class="nav-menu">
+          <div class="nav-menu" v-if="bool">
             <template v-for="(item, index) in nav" :key="index">
               <div class="nav-title" @click="handleClick(index)">
                 <span>{{ item.title }}</span>
               </div>
             </template>
+            <div class="nav-title" @click="search">
+              <el-icon size="20">
+                <search />
+              </el-icon>
+            </div>
+          </div>
+          <div class="nav-menu" v-if="!bool">
+            <el-input v-model="input" placeholder="search" />
+            <el-button type="primary" icon="el-icon-edit" circle></el-button>
+            <el-button type="danger" icon="el-icon-delete" circle></el-button>
           </div>
         </div>
       </el-col>
@@ -26,12 +36,17 @@
 
 <script>
 import logo from "../assets/benbenxiong.png";
+import { Search } from "@element-plus/icons";
 export default {
   name: "Header",
+  components: {
+    Search
+  },
   data() {
     return {
       logo: logo,
       activeIndex: "0",
+      bool: true,
       nav: [
         {
           title: "技术&文章",
@@ -61,6 +76,9 @@ export default {
     logoClick() {
       this.$router.push({ path: "/" });
     },
+    search() {
+      this.bool =false;
+    },
   },
   created() {},
 };
@@ -69,6 +87,7 @@ export default {
 <style lang="scss">
 .head-box {
   background: #ffffff;
+  opacity: 0.9;
   .box-nav {
     display: flex;
     justify-content: space-between;

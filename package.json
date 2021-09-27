@@ -6,8 +6,7 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
-    "lint": "vue-cli-service lint",
-    "analyz": "NODE_ENV=production npm_config_report=true npm run build"
+    "lint": "vue-cli-service lint"
   },
   "dependencies": {
     "@element-plus/icons": "^0.0.11",
@@ -34,6 +33,7 @@
     "@vue/test-utils": "^2.0.0-0",
     "babel-eslint": "^10.1.0",
     "chai": "^4.1.2",
+    "compression-webpack-plugin": "5.0.0",
     "eslint": "^6.7.2",
     "eslint-plugin-prettier": "^3.3.1",
     "eslint-plugin-vue": "^7.0.0",
@@ -41,7 +41,6 @@
     "sass": "^1.26.5",
     "sass-loader": "^8.0.2",
     "service": "^0.1.4",
-    "webpack-bundle-analyzer": "^4.4.2",
-    "compression-webpack-plugin":"5.0.0"
+    "webpack-bundle-analyzer": "^4.4.2"
   }
 }

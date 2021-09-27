@@ -1,4 +1,5 @@
 import { createApp } from "vue";
+import ElementPlus from "element-plus";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
@@ -6,15 +7,16 @@ import { service, serviceForm } from "./api/axios";
 
 import VueMarkdownEditor from "@kangc/v-md-editor";
 import "@kangc/v-md-editor/lib/style/base-editor.css";
-import vuepressTheme from "@kangc/v-md-editor/lib/theme/vuepress.js";
-import "@kangc/v-md-editor/lib/theme/style/vuepress.css";
-
-import "mavon-editor/dist/css/index.css";
+import githubTheme from "@kangc/v-md-editor/lib/theme/github.js";
+import "@kangc/v-md-editor/lib/theme/style/github.css";
 
 import Prism from "prismjs";
 import Hljs from "highlight.js";
+import javascript from "highlight.js/lib/languages/javascript";
 
-VueMarkdownEditor.use(vuepressTheme, {
+Hljs.registerLanguage("javascript", javascript);
+
+VueMarkdownEditor.use(githubTheme, {
   Prism,
   Hljs,
   // extend(md) {
@@ -29,8 +31,8 @@ app.config.globalProperties.$axios = service;
 app.config.globalProperties.$axiosForm = serviceForm;
 
 app
-  // .use(ElementPlus)
+  .use(ElementPlus)
   .use(store)
   .use(router)
-  .use(VueMarkdownEditor)
+  // .use(VueMarkdownEditor)
   .mount("#app");

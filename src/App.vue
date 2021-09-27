@@ -38,16 +38,22 @@ body {
   overflow: hidden;
 }
 #box {
+  position: relative;
   width: 100%;
   height: 100%;
-  background-image: url("./assets/backgroun.jpg");
-  background-size: cover;
-  background-position: center;
-  position: relative;
-  opacity: 0.5;
-  background-attachment: fixed;
   padding: 0;
   margin: 0;
+  &::before {
+    width: 100%;
+    height: 100%;
+    background-image: url("./assets/backgroun.jpg");
+    background-size: cover;
+    background-position: center;
+    position: absolute;
+    background-attachment: fixed;
+    opacity: 0.5;
+    content: "";
+  }
   .el-header {
     padding: 0;
   }
