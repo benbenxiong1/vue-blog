@@ -35,7 +35,7 @@ export default {
           path: "/article-list",
         },
         {
-          title: "随笔日志",
+          title: "时间轴",
           path: "/article-list",
         },
         {

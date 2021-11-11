@@ -8,12 +8,13 @@
             <el-timeline-item
               v-for="(item, index) in activities"
               :key="index"
-              :timestamp="item.timestamp"
+              :timestamp="item.created_at"
               placement="top"
+              @click="darkClick(item.id)"
             >
               <el-card>
-                <h4 v-if="!item.bool">{{ item.content }}</h4>
-                <p>{{ item.timestamp }}</p>
+                <h4 v-if="!item.bool">{{ item.title }}</h4>
+                <p>{{ item.created_at }}</p>
               </el-card>
             </el-timeline-item>
           </el-timeline>
@@ -22,12 +23,12 @@
       <div class="article-page">
         <el-pagination
           :background="true"
-          :current-page="page"
+          :current-page="paginate.page"
           prev-text="上一页"
           next-text="下一页"
           layout="prev, pager, next"
           @current-change="currentChange"
-          :total="1000"
+          :total="paginate.total"
         >
         </el-pagination>
       </div>
@@ -46,30 +47,11 @@ export default {
   },
   data() {
     return {
-      page: 1,
-      activities: [
-        {
-          content: "支持使用图标",
-          timestamp: "2018-04-12 20:46",
-          bool: true,
-        },
-        {
-          content: "支持自定义颜色",
-          timestamp: "2018-04-03 20:46",
-        },
-        {
-          content: "支持自定义尺寸",
-          timestamp: "2018-04-03 20:46",
-        },
-        {
-          content: "支持空心点",
-          timestamp: "2018-04-03 20:46",
-        },
-        {
-          content: "默认样式的节点",
-          timestamp: "2018-04-03 20:46",
-        },
-      ],
+      paginate: {
+        total:0,
+        page:1,
+      },
+      activities: [],
     };
   },
   created() {
@@ -81,6 +63,7 @@ export default {
         page = this.$route.query.page ? this.$route.query.page : 1;
       }
       this.page = parseInt(page);
+      this.getList(page)
     },
     currentChange(page) {
       this.page = page;
@@ -91,6 +74,21 @@ export default {
         },
       });
       this.pageInfo(page);
+    },
+    getList(page) {
+      const that = this;
+      that.$axios
+        .post("/api/article/list", {
+          page: page,
+        })
+        .then((res) => {
+          that.paginate.page = res.data.current_page;
+          that.paginate.total = res.data.total;
+          that.activities = res.data.data;
+        });
+    },
+    darkClick: function (id) {
+      this.$router.push({ path: "/article", query: { id: id } });
     },
   },
 };

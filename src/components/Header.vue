@@ -1,5 +1,5 @@
 <template>
-  <div class="head-box">
+  <div class="head-box" ref="head">
     <el-row :gutter="20">
       <el-col :span="20" :offset="2">
         <div class="box-nav">
@@ -17,16 +17,28 @@
                 <span>{{ item.title }}</span>
               </div>
             </template>
-            <div class="nav-title" @click="search">
+            <div class="nav-title" @click="search(false)">
               <el-icon size="20">
                 <search />
               </el-icon>
             </div>
           </div>
-          <div class="nav-menu" v-if="!bool">
-            <el-input v-model="input" placeholder="search" />
-            <el-button type="primary" icon="el-icon-edit" circle></el-button>
-            <el-button type="danger" icon="el-icon-delete" circle></el-button>
+          <div class="nav-menu-search" v-if="!bool">
+            <el-input
+              v-model="input"
+              placeholder="search"
+              style="width: 20rem"
+            />
+            <div class="search-icon">
+              <el-icon size="20">
+                <search />
+              </el-icon>
+            </div>
+            <div>
+              <el-icon size="20" @click="search(true)">
+                <close />
+              </el-icon>
+            </div>
           </div>
         </div>
       </el-col>
@@ -36,11 +48,12 @@
 
 <script>
 import logo from "../assets/benbenxiong.png";
-import { Search } from "@element-plus/icons";
+import { Search, Close } from "@element-plus/icons";
 export default {
   name: "Header",
   components: {
-    Search
+    Search,
+    Close,
   },
   data() {
     return {
@@ -53,7 +66,7 @@ export default {
           path: "/article-list",
         },
         {
-          title: "随笔日志",
+          title: "时间轴",
           path: "/diary-list",
         },
         {
@@ -76,8 +89,8 @@ export default {
     logoClick() {
       this.$router.push({ path: "/" });
     },
-    search() {
-      this.bool =false;
+    search(bool) {
+      this.bool = bool;
     },
   },
   created() {},
@@ -114,7 +127,20 @@ export default {
       margin: 0 0 0 50px;
       cursor: pointer;
     }
-
+    .nav-menu-search {
+      width: 30rem;
+      display: flex;
+      align-content: center;
+      justify-content: center;
+      align-items: center;
+      .el-input {
+        width: 20rem;
+        margin-right: 1rem;
+      }
+      .search-icon {
+        width: 5rem;
+      }
+    }
   }
 }
 </style>

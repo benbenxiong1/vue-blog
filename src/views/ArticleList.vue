@@ -17,7 +17,7 @@
   <el-row :gutter="20">
     <!--文章列表-->
     <el-col :span="16" :offset="2">
-      <div class="grid-content bg-white">
+      <div class="grid-content bg-white1">
         <div class="content-box">
           <div
             class="content-box-article"
@@ -33,24 +33,19 @@
               </el-col>
               <el-col :span="16">
                 <div class="content-box-content">
-                  <span>我是一个标题{{ item.id }}</span>
+                  <span>{{ item.title }}</span>
                   <div class="content-box-info">
                     <el-icon :size="16">
                       <alarm-clock />
                     </el-icon>
-                    <span>{{ item.time }}</span>
+                    <span>{{ item.created_at }}</span>
                     <el-icon :size="16">
                       <star />
                     </el-icon>
-                    <span>{{ item.number }}</span>
+                    <span>{{ item.star }}</span>
                   </div>
                   <p>
-                    通过阅读本教程，你将学到如 RESTFul 设计风格、PostMan
-                    的使用、OAuth 流程，JWT 概念及使用 和 API
-                    开发相关的进阶知识。不仅如此，本书还会对这些基础知识点进行延伸扩展，为你讲解一些在
-                    API 开发中更为专业、实用的技能，如使用微信测试公众号调试
-                    OAuth
-                    流程、图片验证码等。这些知识将为你未来的编程开发奠定下坚实的基础。使你不论是在做自己的个人项目，或是构建一个伟大的商业产品时，都能得心应手。
+                    {{ item.content }}
                   </p>
                 </div>
               </el-col>
@@ -60,12 +55,11 @@
                 <div class="content-box-foot">
                   <div class="content-box-tag">
                     <el-tag
-                      v-for="value in item.tag"
-                      :key="value.label"
-                      :type="value.type"
-                      effect="dark"
+                      v-for="value in item.label"
+                      :key="value.title"
+                      type="warning"
                     >
-                      {{ value.label }}
+                      {{ value.title }}
                     </el-tag>
                   </div>
                   <div class="content-box-tag-right">
@@ -86,12 +80,12 @@
       <div class="article-page">
         <el-pagination
           :background="true"
-          :current-page="page"
+          :current-page="paginate.page"
           prev-text="上一页"
           next-text="下一页"
           layout="prev, pager, next"
           @current-change="currentChange"
-          :total="1000"
+          :total="paginate.total"
         >
         </el-pagination>
       </div>
@@ -115,60 +109,11 @@ export default {
   data() {
     return {
       activeIndex: "1",
-      page: 1,
+      paginate: {
+        total:0,
+        page:1,
+      },
       data: [
-        {
-          id: 1,
-          tag: [
-            { type: "", label: "标签一" },
-            { type: "success", label: "标签二" },
-            { type: "info", label: "标签三" },
-            { type: "danger", label: "标签四" },
-            { type: "warning", label: "标签五" },
-          ],
-          img: "/1.jpg",
-          time: "2021-09-08",
-          number: 20,
-        },
-        {
-          id: 2,
-          tag: [
-            { type: "", label: "标签一" },
-            { type: "success", label: "标签二" },
-            { type: "info", label: "标签三" },
-            { type: "danger", label: "标签四" },
-            { type: "warning", label: "标签五" },
-          ],
-          img: "/2.jpg",
-          time: "2021-09-08",
-          number: 20,
-        },
-        {
-          id: 3,
-          tag: [
-            { type: "", label: "标签一" },
-            { type: "success", label: "标签二" },
-            { type: "info", label: "标签三" },
-            { type: "danger", label: "标签四" },
-            { type: "warning", label: "标签五" },
-          ],
-          img: "/3.jpg",
-          time: "2021-09-08",
-          number: 20,
-        },
-        {
-          id: 4,
-          tag: [
-            { type: "", label: "标签一" },
-            { type: "success", label: "标签二" },
-            { type: "info", label: "标签三" },
-            { type: "danger", label: "标签四" },
-            { type: "warning", label: "标签五" },
-          ],
-          img: "/2.jpg",
-          time: "2021-09-08",
-          number: 20,
-        },
       ],
       banner: [
         {
@@ -202,10 +147,11 @@ export default {
       if (!page) {
         page = this.$route.query.page ? this.$route.query.page : 1;
       }
-      this.page = parseInt(page);
+      this.paginate.page = parseInt(page);
+      this.getList(page);
     },
     currentChange(page) {
-      this.page = page;
+      this.paginate.page = page;
       this.$router.replace({
         path: this.$route.path,
         query: {
@@ -217,12 +163,25 @@ export default {
     darkClick: function (id) {
       this.$router.push({ path: "/article", query: { id: id } });
     },
+    getList(page) {
+      const that = this;
+      that.$axios
+        .post("/api/article/list", {
+          page: page,
+        })
+        .then((res) => {
+          that.paginate.page = res.data.current_page;
+          that.paginate.total = res.data.total;
+          that.data = res.data.data
+          console.log(res)
+        });
+    },
   },
 };
 </script>
 
 <style lang="scss">
-.bg-white {
+.bg-white1 {
   margin: 20px 10px 20px 10px;
   .content-box-article {
     background: #ffffff;

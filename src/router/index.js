@@ -13,6 +13,17 @@ const routes = [
     },
   },
   {
+    path: "/login",
+    name: "Login",
+    component: () =>
+        import(/* webpackChunkName: "about" */ "../views/Login"),
+    meta: {
+      title: "登录",
+      isHeard: true,
+      isFooter: true,
+    },
+  },
+  {
     path: "/article-list",
     name: "ArticleList",
     meta: {

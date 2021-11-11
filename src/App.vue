@@ -1,7 +1,7 @@
 <template>
   <div class="common-layout" id="box">
     <el-container>
-      <el-header v-if="!$route.meta.isHeard">
+      <el-header v-if="!$route.meta.isHeard" >
         <Header></Header>
       </el-header>
       <div :id="!$route.meta.isHeard ? 'main_box' : ''">
@@ -63,7 +63,7 @@ body {
   }
   #main_box {
     margin: 30px 10px 20px 10px;
-    opacity: 0.9;
+    opacity: 0.8;
   }
 }
 </style>

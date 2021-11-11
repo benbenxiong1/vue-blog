@@ -1,7 +1,7 @@
 // webpack.config.js
 
-const Components = require("unplugin-vue-components/webpack");
-const { ElementPlusResolver } = require("unplugin-vue-components/resolvers");
+// const Components = require("unplugin-vue-components/webpack");
+// const { ElementPlusResolver } = require("unplugin-vue-components/resolvers");
 
 module.exports = {
   productionSourceMap: false,
@@ -9,9 +9,9 @@ module.exports = {
   configureWebpack: {
     mode: "production", //修改成生产环境
     plugins: [
-      Components({
-        resolvers: [ElementPlusResolver()],
-      }),
+      // Components({
+      //   resolvers: [ElementPlusResolver()],
+      // }),
     ],
   },
   devServer: {
